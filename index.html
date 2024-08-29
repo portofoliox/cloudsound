@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundCloud</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            flex-direction: column;
+        }
+        .player-container {
+            background-color: #1DB954;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            position: absolute;
+            bottom: 20px;
+        }
+        .saint-container {
+            width: 80%;
+            height: 50px;
+            background-color: #1DB954;
+            padding: 15px;
+            border-radius: 10px;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            margin-top: -460px;
+            margin-right: 1220px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .bine-container {
+            width: 80%;
+            height: 50px;
+            background-color: #1DB954;
+            padding: 15px;
+            border-radius: 10px;
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 301px;
+            margin-top: -405px;
+            margin-right: 1221px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .bine-container .play-btn {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: -0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .saint-container .play-btn {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: -0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+
+        .saint-container .play-btn:hover {
+            background-color: #f0f0f0;
+        }
+        .bine-container .play-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        .saint-container .play-btn svg {
+            fill: #1DB954;
+        }
+        .bine-container .play-btn svg {
+            fill: #1DB954;
+        }
+        .album-art-large {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-right: 15px;
+        }
+        .artist-profile {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            position: absolute;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-right: 1400px;
+            margin-bottom: 510px;
+        }
+        .artist-profile img {
+            width: 100px;
+            height: 100px;
+        }
+        .artist-art-large {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin-right: 1400px;
+            margin-bottom: 540px;
+        }
+        .album-art-large img {
+            width: 50px;
+            height: 50px;
+        }
+        .artist-art-large img {
+            width: 100px;
+            height: 100px;
+        }
+        .player-controls {
+            display: flex;
+            align-items: center;
+        }
+        .play-btn, .replay-btn {
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+            margin-left: 10px;
+        }
+        .play-btn:hover, .replay-btn:hover {
+            background-color: #f0f0f0;
+        }
+        .play-btn svg, .replay-btn svg {
+            fill: #1DB954;
+        }
+        .replay-btn.active {
+            background-color: #f39c12;
+        }
+        .iimusic-info {
+            margin-left: -1300px;
+            margin-top: -400px;
+            flex-grow: 1;
+        }
+        .iimusic-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .icmusic {
+            margin-left: -1170px;
+            margin-top: -450px;
+            flex-grow: 1;
+        }
+        .iicmusic {
+            margin-left: -1013px;
+            margin-top: -250px;
+            position: absolute;
+            flex-grow: 1;
+        }
+        .icmusic-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            position: absolute;
+            color: #d0d0d0;
+        }
+        .iicmusic-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            position: absolute;
+            color: #d0d0d0;
+        }
+        .imusic-info {
+            margin-left: 70px;
+            margin-top: -460px;
+            flex-grow: 1;
+        }
+        .imusic-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .imusic-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .artist-info {
+            margin-left: 120px;
+            margin-top: -550px;
+            flex-grow: 1;
+        }
+        .artist-title {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .track-info {
+            margin-left: 20px;
+            flex-grow: 1;
+        }
+        .track-title {
+            font-size: 16px;
+            margin-top: -17px;
+            font-weight: 500;
+        }
+        .track-artist {
+            font-size: 14px;
+            font-weight: 400;
+            position: absolute;
+            color: #d0d0d0;
+        }
+        .time-info {
+            font-size: 14px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .audio-player {
+            width: 100%;
+        }
+        .search-container {
+            position: relative;
+            margin-left: 15px;
+        }
+        .search-btn {
+            background-color: #1DB954;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s, width 0.3s;
+            position: absolute;
+            top: 20px;
+            right: -50px;
+        }
+        .search-btn:focus {
+            outline: none;
+        }
+        .search-btn:hover, .search-btn:focus-within {
+            background-color: #1aa34a;
+            width: 200px;
+            border-radius: 10px;
+        }
+        .search-btn svg {
+            fill: #ffffff;
+            transition: fill 0.3s;
+        }
+        .search-btn:focus-within svg {
+            fill: #1DB954;
+        }
+        .search-input {
+            display: none;
+            width: 160px;
+            border: none;
+            background-color: transparent;
+            color: white;
+            padding-left: 10px;
+            font-size: 16px;
+        }
+        .search-btn:focus-within .search-input {
+            display: inline;
+        }
+        .search-input::placeholder {
+            color: white;
+        }
+        .search-results {
+            position: absolute;
+            top: 60px;
+            right: -50px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-height: 300px;
+            overflow-y: auto;
+            width: 200px;
+            display: none;
+        }
+        .search-results.show {
+            display: block;
+        }
+        .search-item {
+            padding: 10px;
+            border-bottom: 1px solid #1DB954;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .search-item:hover {
+            background-color: #1aa34a;
+        }
+        .search-item:last-child {
+            border-bottom: none;
+        }
+        .search-item-title {
+            font-weight: bold;
+        }
+        .search-item-artist {
+            font-size: 14px;
+            color: #d0d0d0;
+        }
+    </style>
+</head>
+<body class="container">
+    <div class="row justify-content-center">
+        <div class="search-container col-12">
+            <button class="search-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M15.5 14h-.79l-.28-.27a6.518 6.518 0 001.48-5.34C15.5 5.01 12.49 2 8.75 2S2 5.01 2 8.75 5.01 15.5 8.75 15.5a6.518 6.518 0 005.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6.75 0C6.01 14 4 11.99 4 8.75S6.01 3.5 8.75 3.5 13.5 5.51 13.5 8.75 11.49 14 8.75 14z"></path>
+                </svg>
+                <input type="text" class="search-input" placeholder="Caută...">
+            </button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+            </div>
+<div class="row justify-content-center">
+    <div class="player-container col-12 col-md-10">
+        <div class="album-art-large">
+            <img src="noroc.png" alt="Album Art">
+        </div>
+        <button class="play-btn" id="playPauseBtn">
+            <svg id="playIcon" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M8 5v14l11-7z"></path>
+            </svg>
+            <svg id="pauseIcon" viewBox="0 0 24 24" width="24" height="24" style="display: none;">
+                <path d="M6 19h4V5H6zm8-14v14h4V5h-4z"></path>
+            </svg>
+        </button>
+        <button class="replay-btn" id="replayBtn">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+                <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"></path>
+            </svg>
+        </button>
+        <div class="track-info">
+            <div class="track-title">Am Norocul Scris In Frunte</div>
+            <div class="track-artist">Florin Salam</div>
+        </div>
+        <div class="time-info" id="timeInfo">00:00 / 00:00</div>
+    </div>
+</div>
+<audio id="audioPlayer" class="audio-player">
+    <source src="melodie.mp3" type="audio/mpeg">
+    Browser-ul tău nu suportă elementul audio.
+</audio>
+<script>
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const replayBtn = document.getElementById('replayBtn');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const timeInfo = document.getElementById('timeInfo');
+    const searchInput = document.querySelector('.search-input');
+    const searchResults = document.getElementById('searchResults');
+
+    let searchTimeout;
+    let isReplayActive = false;
+
+    const songs = [
+        { title: "Alerta de frumusete", artist: "Adrian Norocel", duration: "2:34", albumArt: "album1.jpg" },
+        { title: "Baklava", artist: "Gya, Babasha", duration: "2:24", albumArt: "album2.jpg" },
+        { title: "Hai In Mercedes", artist: "Nicolae Guta, Gerard Inima de Leu", duration: "3:26", albumArt: "album3.jpg" },
+        { title: "Ciocolata", artist: "Tzanca Uraganu", duration: "2:49", albumArt: "album4.jpg" },
+        { title: "Gipsy Style", artist: "Costel Biju", duration: "3:08", albumArt: "album5.jpg" }
+    ];
+
+    function showSearchResults(results) {
+        let html = '';
+        results.forEach(song => {
+            html += `
+                <div class="search-item" data-title="${song.title}" data-artist="${song.artist}">
+                    <div class="search-item-title">${song.title}</div>
+                    <div class="search-item-artist">${song.artist}</div>
+                </div>
+            `;
+        });
+        searchResults.innerHTML = html;
+        searchResults.classList.add('show');
+    }
+
+    function hideSearchResults() {
+        searchResults.innerHTML = '';
+        searchResults.classList.remove('show');
+    }
+
+    function searchSongs(query) {
+        query = query.toLowerCase();
+        const results = songs.filter(song =>
+            song.title.toLowerCase().includes(query) ||
+            song.artist.toLowerCase().includes(query)
+        );
+        return results;
+    }
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim();
+        clearTimeout(searchTimeout);
+        if (query.length === 0) {
+            hideSearchResults();
+        } else {
+            searchTimeout = setTimeout(() => {
+                const results = searchSongs(query);
+                showSearchResults(results);
+            }, 300);
+        }
+    });
+
+    searchInput.addEventListener('blur', () => {
+        hideSearchResults();
+    });
+
+    searchResults.addEventListener('click', (event) => {
+        const target = event.target.closest('.search-item');
+        if (target) {
+            const title = target.getAttribute('data-title');
+            const artist = target.getAttribute('data-artist');
+            document.querySelector('.track-title').textContent = title;
+            document.querySelector('.track-artist').textContent = artist;
+            hideSearchResults();
+        }
+    });
+
+    playPauseBtn.addEventListener('click', () => {
+        if (audioPlayer.paused) {
+            audioPlayer.play();
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+        } else {
+            audioPlayer.pause();
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+        }
+    });
+
+    replayBtn.addEventListener('click', () => {
+        isReplayActive = !isReplayActive;
+        replayBtn.classList.toggle('active', isReplayActive);
+    });
+
+    audioPlayer.addEventListener('timeupdate', () => {
+        const currentTime = audioPlayer.currentTime;
+        const duration = audioPlayer.duration;
+        const formattedCurrentTime = formatTime(currentTime);
+        const formattedDuration = formatTime(duration);
+        timeInfo.textContent = `${formattedCurrentTime} / ${formattedDuration}`;
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+        if (isReplayActive) {
+            audioPlayer.currentTime = 0;
+            audioPlayer.play();
+        } else {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+        }
+    });
+
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        const duration = audioPlayer.duration;
+        const formattedDuration = formatTime(duration);
+        timeInfo.textContent = `00:00 / ${formattedDuration}`;
+    });
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Extrage calea curentă
+            const path = window.location.pathname;
+
+            // Dacă calea se termină cu .html, redirecționează fără extensie
+            if (path.endsWith('.html')) {
+                const newPath = path.slice(0, -5); // elimină .html
+                if (newPath.length > 0) {
+                    window.location.replace(newPath);
+                } else {
+                    window.location.replace('/');
+                }
+            }
+        });
+    </script>
+</body>
+<body>
+    </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="artist-art-large">
+            <div class="artist-art-large">
+            </div>
+            </div>
+        <div class="artist-info">
+            <div class="artist-title">Florin Salam</div>
+            <div class="track-artist">541,778 monthly listeners</div>
+        </div>
+        <div class="saint-container" onclick="window.location.href='https://example.com'">
+            <button class="play-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M8 5v14l11-7z"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="bine-container" onclick="window.location.href='https://example.com'">
+            <button class="play-btn">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path d="M8 5v14l11-7z"></path>
+                </svg>
+            </button>
+            </div>
+            <div class="imusic-info">
+                <div class="imusic-title">Saint Tropez</div>
+                <div class="track-artist">Florin Salam</div>
+            </div>
+            <div class="icmusic">
+                <div class="icmusic-subtitle">3:30</div>
+            </div>
+            </div>
+            <div class="iimusic-info">
+                <div class="iimusic-title">Bine Ma</div>
+                <div class="track-artist">Florin Salam</div>
+            </div>
+    <div class="iicmusic">
+        <div class="iicmusic-subtitle">3:43</div>
+    </div>
+    <div class="artist-profile">
+        <img src="salam.jfif" alt="RaXCC">
+    </div>
+  <script src="script.js"></script>
+</div>
+</body>
+</html>
